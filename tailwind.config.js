@@ -11,6 +11,7 @@ module.exports = {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        // 'image-font':"url('./public/d76d6361-3fbf-4842-8dd7-e05520557280.jpeg')",
       },
     },
   },
