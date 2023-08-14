@@ -37,10 +37,17 @@ body {
 
 .landing {
   background: url("../public/d76d6361-3fbf-4842-8dd7-e05520557280.jpeg");
-  @apply bg-cover;
+  @apply bg-cover  ;
 
 }
 
 .shadow-text {
   text-shadow: 0 0 3px black;
 }
+
+
+.card:hover .banner{
+  opacity: 1;
+}
+
+
