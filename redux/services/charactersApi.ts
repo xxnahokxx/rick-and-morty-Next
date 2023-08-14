@@ -11,10 +11,10 @@ export type Character = {
         name: string
         url: string
     }
-    location: {
+    location?: {
         name: string
     }
-    episode: string[]
+    episode?: string[]
 }
 
 type Characters = {
