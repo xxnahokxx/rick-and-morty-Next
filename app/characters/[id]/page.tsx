@@ -24,11 +24,11 @@ const CharacterById = () => {
                         <li>{data?.species}</li>
                         <li>{data?.gender}</li>
                         <li>{data?.origin.name}</li>
-                        <li>{data?.location.name}</li>
+                        <li>{data?.location?.name}</li>
                     </ul>
                     <h2 className='text-center text-[20px] font-semibold my-5'>Episodes</h2>
                     <div className='grid grid-cols-2 pb-[60px]'>
-                        {data?.episode.map((el, index) => {
+                        {data?.episode?.map((el, index) => {
                             const cap = el.split("/").at(-1)
                             if (cap) return <Episodes id={parseInt(cap)} key={index}></Episodes>
                         })}
