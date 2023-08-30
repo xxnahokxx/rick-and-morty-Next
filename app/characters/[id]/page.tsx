@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 "use client"
 
-import { useGetCharacterByIdQuery } from '@/redux/services/charactersApi'
+import { Character, useGetCharacterByIdQuery } from '@/redux/services/charactersApi'
 import { useParams, usePathname } from 'next/navigation'
 import Episodes from "@/components/episode/Episodes"
 import React from 'react'
@@ -11,8 +11,8 @@ const CharacterById = () => {
     const pathname = usePathname();
     const params = useParams();
     const id = params && parseInt(params.id.toString())
-    const { data, isLoading, isError } = useGetCharacterByIdQuery({ id });
-
+    let { data, isLoading, isError } = useGetCharacterByIdQuery({ id });
+    data = data as Character
     return (
         <div className='container mx-auto'>
             <div className='grid grid-cols-2 items-center py-10'>
