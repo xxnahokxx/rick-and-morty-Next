@@ -15,9 +15,10 @@ export type Character = {
         name: string
     }
     episode?: string[]
+    userId?: string
 }
 
-type Characters = {
+export type Characters = {
     results: Character[]
     info: {
         count: number
@@ -33,15 +34,15 @@ export const charactersApi = createApi({
         baseUrl: "https://rickandmortyapi.com/api/",
     }),
     endpoints: (builder) => ({
-        getCharacters: builder.query<Characters, {page: number, name: string}>({
-            query: ({ page, name}) => ({
+        getCharacters: builder.query<Characters, { page: number, name: string }>({
+            query: ({ page, name }) => ({
                 url: `character?page=${page}&name=${name}`,
                 method: 'GET',
                 // body: "",
             })
         }),
-        getCharacterById: builder.query<Character, {id: number}>({
-            query: ({id}) => `character/${id}`
+        getCharacterById: builder.query<Character | Character[], { id: number | string | undefined }>({
+            query: ({ id }) => `character/${id}`
         }),
     })
 

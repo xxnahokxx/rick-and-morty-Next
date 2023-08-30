@@ -3,6 +3,7 @@ import Card from '@/components/card/Card';
 // import { decrement, increment } from '@/redux/features/counterSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { useGetCharactersQuery } from '@/redux/services/charactersApi';
+import { useAuth } from '@clerk/nextjs';
 import { Input, Pagination } from '@nextui-org/react';
 import React, { useState } from 'react'
 
@@ -10,6 +11,7 @@ const Characters = () => {
   const [page, setPage] = useState<number>(1);
   const [name, setName] = useState<string>("");
   const { data, error, isLoading, isFetching } = useGetCharactersQuery({ page, name });
+  const { isLoaded, userId } = useAuth();
 
 
   // const info = useAppSelector(state => state.counterReducer.counter);
@@ -38,7 +40,7 @@ const Characters = () => {
 
       <div className='container grid grid-cols-5 mx-auto gap-6'>
         {
-          data?.results.map((el, index) => <Card id={el.id} name={el.name} status={el.status} species={el.species} gender={el.gender} origin={el.origin} image={el.image} key={index} />
+          data?.results.map((el, index) => <Card id={el.id} name={el.name} status={el.status} species={el.species} gender={el.gender} origin={el.origin} image={el.image} key={index} userId={userId ?? undefined} />
           )
         }
       </div>

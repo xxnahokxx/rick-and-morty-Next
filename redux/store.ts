@@ -3,6 +3,7 @@ import counterReducer from "./features/counterSlice"
 import { charactersApi } from "./services/charactersApi";
 import { setupListeners } from "@reduxjs/toolkit/dist/query";
 import { episodesApi } from "./services/episodesApi";
+import { favoritesApi } from "./services/favoritesApi";
 
 
 export const store = configureStore({
@@ -10,8 +11,9 @@ export const store = configureStore({
         counterReducer,
         [charactersApi.reducerPath]: charactersApi.reducer,
         [episodesApi.reducerPath]: episodesApi.reducer,
+        [favoritesApi.reducerPath]: favoritesApi.reducer,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([charactersApi.middleware, episodesApi.middleware]),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat([charactersApi.middleware, episodesApi.middleware, favoritesApi.middleware]),
 })
 
 setupListeners(store.dispatch)
