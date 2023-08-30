@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
-
+const { URL } = process.env
 
 export type Favorite = {
     _id: string
@@ -11,7 +11,7 @@ export type Favorite = {
 export const favoritesApi = createApi({
     reducerPath: "favoritesAPI",
     baseQuery: fetchBaseQuery({
-        baseUrl: "http://localhost:3000/",
+        baseUrl: URL,
     }),
     endpoints: (builder) => ({
         getFavorites: builder.query<Favorite[], {}>({
