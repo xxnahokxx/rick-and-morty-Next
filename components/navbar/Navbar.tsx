@@ -4,12 +4,15 @@ import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, Nav
 import Link from 'next/link';
 import { usePathname } from "next/navigation"
 import { UserButton, useAuth, useUser } from "@clerk/nextjs";
+import Image from 'next/image';
+import ram1 from "@/img/RaM1.png"
+import ram2 from "@/img/RaM2.png"
 
 
 const NavbarSection = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
     const pathname = usePathname()
-    const { isLoaded: userLoaded, user} = useUser();
+    const { isLoaded: userLoaded, user } = useUser();
     const { isLoaded, userId, sessionId, getToken } = useAuth();
 
     const activeLink =
@@ -50,8 +53,11 @@ const NavbarSection = () => {
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
                     className="sm:hidden"
                 />
-                <NavbarBrand>
-                    <p className="font-bold text-inherit">R&M</p>
+                <NavbarBrand className='[&>a]:relative'>
+                    <Link href={"/"} title='Rick And Morty'>
+                        <Image className='w-20' src={ram1} alt='logo'></Image>
+                        <Image className='w-20 absolute top-0 opacity-0 hover:opacity-100 transition duration-500' src={ram2} alt='logo'></Image>
+                    </Link>
                 </NavbarBrand>
             </NavbarContent>
 
@@ -77,11 +83,11 @@ const NavbarSection = () => {
                     </Link>
                 </NavbarItem>
                 {
-                 userId && <NavbarItem className={pathname === "/favorites" ? activeLink : inactiveLink}>
-                    <Link color="foreground" href="/favorites">
-                        Favorites
-                    </Link>
-                </NavbarItem>
+                    userId && <NavbarItem className={pathname === "/favorites" ? activeLink : inactiveLink}>
+                        <Link color="foreground" href="/favorites">
+                            Favorites
+                        </Link>
+                    </NavbarItem>
                 }
             </NavbarContent>
             <NavbarContent justify="end">
@@ -97,14 +103,14 @@ const NavbarSection = () => {
                 }
 
                 <NavbarItem className='flex gap-3 items-center'>
-                    {userId && userLoaded && <h1>{firstName ?`${lastName} ${firstName}` : `${userName}`}</h1> }
+                    {userId && userLoaded && <h1>{firstName ? `${lastName} ${firstName}` : `${userName}`}</h1>}
                     <UserButton afterSignOutUrl="/" />
                 </NavbarItem>
             </NavbarContent>
             <NavbarMenu>
                 {menuItems.map((item, index) => (
 
-                    (!userId && item.name === "Favorites" ? <></>:  <NavbarMenuItem key={`${item.name}-${index}`}>
+                    (!userId && item.name === "Favorites" ? <></> : <NavbarMenuItem key={`${item.name}-${index}`}>
                         <Link
                             color={
                                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
