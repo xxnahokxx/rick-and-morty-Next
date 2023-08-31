@@ -41,6 +41,8 @@ body {
 
 }
 
+
+
 .shadow-text {
   text-shadow: 0 0 3px black;
 }
@@ -50,4 +52,6 @@ body {
   opacity: 1;
 }
 
-
+body {
+  height: 100%;
+}

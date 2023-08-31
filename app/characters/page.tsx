@@ -38,7 +38,7 @@ const Characters = () => {
       <Pagination className='my-11' color={"success"} total={data?.info.pages ?? 1} initialPage={1} onChange={(page: number) => setPage(page)} page={page} />
 
 
-      <div className='container grid grid-cols-5 mx-auto gap-6'>
+      <div className='container px-4 md:px-8 grid grid-cols-1 xl:grid-cols-4 md:grid-cols-2 mx-auto gap-6'>
         {
           data?.results.map((el, index) => <Card id={el.id} name={el.name} status={el.status} species={el.species} gender={el.gender} origin={el.origin} image={el.image} key={index} userId={userId ?? undefined} />
           )

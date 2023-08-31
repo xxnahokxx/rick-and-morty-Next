@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Navbar, NavbarBrand, NavbarContent, NavbarItem, Button, NavbarMenu, NavbarMenuItem, NavbarMenuToggle } from "@nextui-org/react";
 import Link from 'next/link';
 import { usePathname } from "next/navigation"
@@ -8,10 +8,14 @@ import { UserButton, useAuth, useUser } from "@clerk/nextjs";
 
 const NavbarSection = () => {
     const [isMenuOpen, setIsMenuOpen] = useState<boolean | undefined>(false);
-
     const pathname = usePathname()
     const { isLoaded: userLoaded, user} = useUser();
     const { isLoaded, userId, sessionId, getToken } = useAuth();
+
+    const activeLink =
+        "border-b-2  border-[#94ef13] text-[#94ef13] duration-200 cursor-pointer font-semibold"
+    const inactiveLink =
+        "border-b-2  border-[#94ef13] font-semibold border-opacity-0 hover:border-opacity-100 hover:text-[#94ef13] duration-200 cursor-pointer"
 
     const info = user
 
@@ -32,11 +36,15 @@ const NavbarSection = () => {
             name: "About",
             url: "/about",
         },
+        {
+            name: "Favorites",
+            url: "/favorites",
+        },
     ];
     return (
 
 
-        <Navbar className='[&>header]:max-w-[100%] px-14' onMenuOpenChange={(isOpen: boolean | undefined) => setIsMenuOpen(isOpen)}>
+        <Navbar className='[&>header]:max-w-[100%] md:px-14' onMenuOpenChange={(isOpen: boolean | undefined) => setIsMenuOpen(isOpen)}>
             <NavbarContent>
                 <NavbarMenuToggle
                     aria-label={isMenuOpen ? "Close menu" : "Open menu"}
@@ -48,28 +56,28 @@ const NavbarSection = () => {
             </NavbarContent>
 
             <NavbarContent className="hidden sm:flex gap-4" justify="center">
-                <NavbarItem isActive>
+                <NavbarItem className={pathname === "/" ? activeLink : inactiveLink}>
                     <Link color="foreground" href="/">
                         Home
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive>
+                <NavbarItem className={pathname === "/characters" ? activeLink : inactiveLink}>
                     <Link href="/characters" aria-current="page">
                         Characters
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive>
+                <NavbarItem className={pathname === "/episodes" ? activeLink : inactiveLink}>
                     <Link color="foreground" href="/episodes">
                         Episodes
                     </Link>
                 </NavbarItem>
-                <NavbarItem isActive>
+                <NavbarItem className={pathname === "/about" ? activeLink : inactiveLink}>
                     <Link color="foreground" href="/about">
                         About
                     </Link>
                 </NavbarItem>
                 {
-                 userId && <NavbarItem isActive>
+                 userId && <NavbarItem className={pathname === "/favorites" ? activeLink : inactiveLink}>
                     <Link color="foreground" href="/favorites">
                         Favorites
                     </Link>
@@ -95,7 +103,8 @@ const NavbarSection = () => {
             </NavbarContent>
             <NavbarMenu>
                 {menuItems.map((item, index) => (
-                    <NavbarMenuItem key={`${item.name}-${index}`}>
+
+                    (!userId && item.name === "Favorites" ? <></>:  <NavbarMenuItem key={`${item.name}-${index}`}>
                         <Link
                             color={
                                 index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
@@ -105,7 +114,7 @@ const NavbarSection = () => {
                         >
                             {item.name}
                         </Link>
-                    </NavbarMenuItem>
+                    </NavbarMenuItem>)
                 ))}
             </NavbarMenu>
         </Navbar>

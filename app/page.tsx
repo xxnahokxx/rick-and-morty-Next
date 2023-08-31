@@ -16,7 +16,7 @@ export default function Home() {
   const principalCharacters = ids.map(id => data?.results.find(el => el.id === id))
   return (
     <>
-      <div className='container flex flex-col justify-end md:items-start p-4  mx-auto h-screen md:h-[500px] bg-slate-400 landing'>
+      <div className='container flex flex-col md:justify-end md:items-start p-4 mx-auto  md:h-[500px] bg-slate-400 landing'>
         <h1 className='font-bold text-[30px] text-white shadow-text'>Welcome to my Rick and Morty page</h1>
         <p className=' font-medium leading-9 text-white shadow-text'>On this page you will find all your favorite characters from this famous animated series...</p>
         <Link href={"/characters"} className=''>
@@ -25,20 +25,20 @@ export default function Home() {
       </div>
       <div className='container mx-auto mt-20'>
 
-        <div className='flex [&>img]:h-[350px] items-center'>
+        <div className='lg:flex  [&>img]:xl:h-[350px] items-center flex-col xl:flex-row'>
           <ImageNext src={MortySmith} alt="Rick" />
           <div>
             <h2 className='mb-7 font-bold text-[25px] text-center'>Synopsis</h2>
 
-            <p className='text-justify mx-auto'>The series follows the misadventures of alcoholic scientist Rick and his overly nervous grandson Morty, who split their time between domestic family life and intergalactic travel. Often finding themselves in a heap of trouble that more often than not created through their own actions, these two will get themselves out of trouble in the most entertaining way! This extremely clever show will blow your mind as well as all other parallel realities of your mind!</p>
+            <p className='text-center w-[90%] xl:w-[100%] mx-auto'>The series follows the misadventures of alcoholic scientist Rick and his overly nervous grandson Morty, who split their time between domestic family life and intergalactic travel. Often finding themselves in a heap of trouble that more often than not created through their own actions, these two will get themselves out of trouble in the most entertaining way! This extremely clever show will blow your mind as well as all other parallel realities of your mind!</p>
           </div>
           <ImageNext src={RickSanchez} alt="Rick" />
         </div>
 
       </div>
       <div className='container mx-auto my-20'>
-        <h2 className='mb-7 font-bold text-[25px]'>Protagonists</h2>
-        <div className='grid grid-cols-5 gap-10 px-10'>
+        <h2 className='mb-7 font-bold text-[25px] text-center'>Protagonists</h2>
+        <div className='flex flex-wrap justify-center gap-10 px-10 '>
           {principalCharacters && principalCharacters?.map(el => el !== undefined && <Card
             isFooterBlurred
             radius="lg"

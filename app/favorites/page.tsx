@@ -18,7 +18,9 @@ const Favorites = () => {
     const info = characters as Character[]
     return (
         <>
-            <div className='flex'>
+            <h1 className='text-center text-3xl font-bold my-12'>Favorites</h1>
+
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 container px-8 gap-7 mx-auto'>
                 {info && isLoaded && info.map(el => <Card key={el.id} id={el.id} name={el.name} status={el.status} species={el.species} origin={el.origin} gender={el.gender} image={el.image} userId={userId ?? undefined} ></Card>)
                 }
             </div>
