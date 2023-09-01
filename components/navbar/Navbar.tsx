@@ -37,7 +37,7 @@ const NavbarSection = () => {
         },
         {
             name: "Episodes",
-            url: "/episode",
+            url: "/episodes",
         },
         {
             name: "Favorites",
