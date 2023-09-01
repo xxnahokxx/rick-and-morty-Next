@@ -36,12 +36,16 @@ const NavbarSection = () => {
             url: "/characters",
         },
         {
-            name: "About",
-            url: "/about",
+            name: "Episodes",
+            url: "/episode",
         },
         {
             name: "Favorites",
             url: "/favorites",
+        },
+        {
+            name: "About",
+            url: "/about",
         },
     ];
     return (
